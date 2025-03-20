@@ -103,7 +103,7 @@ class LockerNode(Node):
                 self.state = GOING_HOME
                 self.goal = Point()
         elif self.state == GOING_HOME:
-            distance_diff = find_euclidean_distance(self.goal, msg.pose.pose.position)
+            distance_diff = abs(self.goal.x - msg.pose.pose.position.x)
             logging.debug(f"GOING HOME: distance_diff: {distance_diff:.2f}")
             if distance_diff < GOAL_TOLERANCE:
                 self.publish(self.locker_goal, None)
