@@ -75,7 +75,7 @@ class LockerNode(Node):
         goal = f"({self.goal.x}, {self.goal.y})" if self.goal is not None else "None"
         logging.debug(f"state: {self.state} position: ({px:.2f}, {py:.2f}) goal: {goal} target_heading: {self.target_heading}")
         if self.state == GOING_TO_LOCKER:
-            distance_diff = find_euclidean_distance(self.goal, msg.pose.pose.position)
+            distance_diff = abs(self.goal.x - msg.pose.pose.position.x)
             logging.debug(f"GOING TO LOCKER: distance_diff: {distance_diff:.2f}")
             if distance_diff < GOAL_TOLERANCE:
                 yaw = find_yaw(msg.pose.pose.orientation)
